@@ -1,6 +1,6 @@
 setInterval(() => { 
-    document.getElementById('presentUTC').innerHTML = new Date().toUTCString();
-    document.getElementById('presentUnix').innerHTML = Math.trunc(new Date().getTime() / 1000);
+    document.getElementById('presentUTC').innerHTML = new Date().toUTCString(); // Atualiza o horário UTC atual a cada segundo.
+    document.getElementById('presentUnix').innerHTML = Math.trunc(new Date().getTime() / 1000); // Atualiza o timestamp Unix atual a cada segundo.
 }, 1000);
 
 
@@ -26,7 +26,7 @@ async function convertDate(dateValue, fusoValue) {
     convertedUnixText.innerHTML = responseJson.unix;
 }
 
-async function cleanInnerText() {
+async function cleanConverterInnerText() {
     convertedUTCText.innerHTML = '';
     convertedUnixText.innerHTML = '';
 }
@@ -68,9 +68,16 @@ async function differenceDates(date1, date2) {
         return;
     }
 
-    // Exibe os valores calculados (dias, horas, minutos e segundos) nos elementos HTML.
     differenceDays.innerHTML = responseJson.difference.days;
     differenceHours.innerHTML = responseJson.difference.hours;
     differenceMinutes.innerHTML = responseJson.difference.minutes;
     differenceSeconds.innerHTML = responseJson.difference.seconds;
 };
+
+
+async function cleanDifferenceInnerText() {
+    differenceDays.innerHTML = '';
+    differenceHours.innerHTML = '';
+    differenceMinutes.innerHTML = '';
+    differenceSeconds.innerHTML = '';
+}
