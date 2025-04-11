@@ -10,6 +10,7 @@ const isInvalidDate = (date) => date.toUTCString() === "Invalid Date";
 
 app.get("/api/:date", function(req, res){
     let date = new Date(req.params.date);
+    let fuso = parseFloat(req.query.fuso);
 
     if(isInvalidDate(date)){
         date = new Date(+req.params.date);
@@ -20,16 +21,36 @@ app.get("/api/:date", function(req, res){
         return;
     };
 
+    if(!isNaN(fuso)){
+        if(fuso > 12 || fuso < -12){
+            if(fuso > 12){
+                fuso = 12;
+            }
+            if(fuso < -12){
+                fuso = -12;
+            }
+            res.redirect(`/api/${req.params.date}?fuso=${fuso}`);
+        }
+        if(fuso > 12){
+            fuso = 12;
+        }
+        if(fuso < -12){
+            fuso = -12;
+        }
+        date.setHours(date.getHours() + fuso);
+    }
+
     res.json({
         unix: date.getTime(),
-        utc: date.toUTCString()
+        utc: date.toUTCString(),
+        fuso_horario: fuso
     })
 });
 
 app.get("/api", function(req, res){
     res.json({
         unix: new Date().getTime(),
-        utc: new Date().toUTCString()
+        utc: new Date().toUTCString(),
     })
 });
 
