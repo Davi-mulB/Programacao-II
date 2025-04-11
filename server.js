@@ -55,6 +55,7 @@ app.get("/api/diff/:date1/:date2", function(req, res){
     let diffHours = diffMinutes / 60;
     let diffDays = diffHours / 24;
 
+
     res.json({
         date1: date1.toUTCString(),
         date1Unix: date1Unix,
