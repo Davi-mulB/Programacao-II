@@ -41,34 +41,44 @@ app.get("/api/:date", function(req, res){
 });
 
 app.get("/api/diff/:date1/:date2", function(req, res){
-    let date1 = new Date(req.params.date1);
-    let date2 = new Date(req.params.date2);
-    let date1Unix;
-    let date2Unix;
+    let date1Raw = req.params.date1;
+    let date2Raw = req.params.date2;
 
-
-    if(isNaN(date1)){
-        let date1Unix = date1.getTime();
-    } else {
-        let date1Unix = date1;
-    }
-    if(isNaN(date2)){
-        let date2Unix = date2.getTime();
-    } else {
-        let date2Unix = date2;
-    }
     
-    let diff = Math.abs(date1Unix - date2Unix);
+    let date1;
+    if (isNaN(date1Raw)) {
+        date1 = new Date(date1Raw);
+    } else {
+        date1 = new Date(Number(date1Raw));
+    }
 
-    let diffDays = parseInt(diff / (1000 * 60 * 60 * 24));
-    // let diffHours = ((diff - (diffDays * 24 * 60 * 60 * 1000)) / (1000 * 60 * 60)) ;
+    let date2;
+    if (isNaN(date2Raw)) {
+        date2 = new Date(date2Raw);
+    } else {
+        date2 = new Date(Number(date2Raw));
+    }
+
+    if (isInvalidDate(date1) || isInvalidDate(date2)) {
+        return res.json({error: "Invalid Date(s)"});
+    }
+
+    let diffMilliseconds = Math.abs(date1.getTime() - date2.getTime());
+    let diffDays = Math.floor(diffMilliseconds / (1000 * 60 * 60 * 24));
+    let diffHours = Math.floor((diffMilliseconds % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    let diffMinutes = Math.floor((diffMilliseconds % (1000 * 60 * 60)) / (1000 * 60));
+    let diffSeconds = Math.floor((diffMilliseconds % (1000 * 60)) / 1000);
 
     res.json({
         date1: date1.toUTCString(),
-        date1Unix: date1Unix,
-        date2Unix: date2Unix,
-        difference_days: diffDays
-    })
+        date2: date2.toUTCString(),
+        difference: {
+            days: diffDays,
+            hours: diffHours,
+            minutes: diffMinutes,
+            seconds: diffSeconds
+        }
+    });
 });
 
 app.get("/api", function(req, res){

@@ -43,3 +43,22 @@ li {
 a {
 	color: #2574A9;
 }
+
+.outputs > div {
+	margin-bottom: 1rem;
+}
+
+.outputs > div,
+span {
+	background-color: gray;
+	color: white;
+	height: 2rem;
+}
+
+.outputsConverter {
+	height: 6rem;
+}
+
+.outputsDifference {
+	height: 10rem;
+}
