@@ -3,14 +3,20 @@
 <html>
    <head>
       <title>Microsserviço de timestamp</title>
-      <link rel="shortcut icon" href="https://cdn.freecodecamp.org/universal/favicons/favicon-32x32.png" type="image/x-icon"/>
+    
       <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet" type="text/css">
       <link href="style.css" rel="stylesheet" type="text/css">
       <script src="script.js"></script>
    </head>
 
    <body>
-    <h1>Microsserviço de timestamp</h1>
+    <header>
+      <h1>Microsserviço de timestamp</h1>
+      <div id="presentTimer">
+        <div id="presentUTC"></div>
+        <div id="presentUnix"></div>
+      </div>
+    </header>
       <div class="interactiveApi">
         <div class="converter">
           <h2>Conversor de datas</h2>
@@ -47,26 +53,30 @@
               <option value="-11">GMT -11</option>
               <option value="-12">GMT -12</option>
             </select>
-            <input type="button" id="converterButton" onclick="convertDate(dateConverter.value, fusoHorarios.value)" placeholder="converter">
+            <button id="converterButton" onclick="convertDate(dateConverter.value, fusoHorarios.value)">converter</button>
           </div>
           <div class="outputsConverter outputs">
             <div id="convertedUTC"><span id="convertedUTCText"></span></div>
             <div id="convertedUnix"><span id="convertedUnixText"></span></div>
           </div>
-          <input type="button" onclick="cleanInnerText()">
+          <button onclick="cleanInnerText()">apagar</button>
       </div>
       <div class="difference">
         <h2>Calculador de diferenças entre datas</h2>
         <div class="inputs">
           <input type="text" id="dateDifference1" placeholder="ex.: 2024-10-13">
          <input type="text" id="dateDifference2" placeholder="ex.: 2025-05-29">
-         <input type="button" id="converterButton" placeholder="converter">
+         <button id="converterButton" onclick="differenceDates(dateDifference1.value, dateDifference2.value)" placeholder="converter">calcular</button>
         </div>
         <div class="outputsDifference outputs">
-          <div id="Days"><span id="differenceDays"></span></div>
-          <div id="Hours"><span id="differenceHours"></span></div>
-          <div id="Minutes"><span id="differenceMinutes"></span></div>
-          <div id="Seconds"><span id="differenceSeconds"></span></div>
+          <div>Dias</div>
+          <span id="differenceDays"></span>
+          <div>Horas</div>
+          <span id="differenceHours"></span>
+          <div>Minutos</div>
+          <span id="differenceMinutes"></span>
+          <div>Segundos</div>
+          <span id="differenceSeconds"></span>
         </div>
       </div>
     </div>
