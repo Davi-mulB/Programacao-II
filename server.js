@@ -7,10 +7,19 @@ app.get("/", function(req, res){
 });
 
 const isInvalidDate = (date) => date.toUTCString() === "Invalid Date";
+const isInvalidTimezone = (timezone) => timezone < -12 || timezone > 12;
+const setTimezone = (timezone) => {if(timezone < -12){
+        timezone = -12;
+        return timezone;
+    } if(timezone > 12){
+        timezone = 12
+        return timezone;
+    }
+}
 
 app.get("/api/:date", function(req, res){
     let date = new Date(req.params.date);
-    let fuso = parseFloat(req.query.fuso);
+    let timezone = parseFloat(req.query.timezone);
 
     if(isInvalidDate(date)){
         date = new Date(+req.params.date);
@@ -21,29 +30,44 @@ app.get("/api/:date", function(req, res){
         return;
     };
 
-    if(!isNaN(fuso)){
-        if(fuso > 12 || fuso < -12){
-            if(fuso > 12){
-                fuso = 12;
-            }
-            if(fuso < -12){
-                fuso = -12;
-            }
-            res.redirect(`/api/${req.params.date}?fuso=${fuso}`);
+    if(!isNaN(timezone)){
+        if(isInvalidTimezone(timezone)){
+            timezone = setTimezone(timezone);
         }
-        if(fuso > 12){
-            fuso = 12;
-        }
-        if(fuso < -12){
-            fuso = -12;
-        }
-        date.setHours(date.getHours() + fuso);
+        date.setHours(date.getHours() + timezone);
     }
 
     res.json({
         unix: date.getTime(),
         utc: date.toUTCString(),
-        fuso_horario: fuso
+        timezone: timezone
+    })
+});
+
+app.get("/api/diff/:date1/:date2", function(req, res){
+    let date1 = new Date(req.params.date1);
+    let date2 = new Date(req.params.date2);
+
+    let date1Unix = date1.getTime();
+    let date2Unix = date2.getTime();
+    
+    let diff = Math.abs(date1Unix - date2Unix);
+    
+    let diffMilliseconds = diff;
+    let diffSeconds = diffMilliseconds / 1000;
+    let diffMinutes = diffSeconds / 60;
+    let diffHours = diffMinutes / 60;
+    let diffDays = diffHours / 24;
+
+    res.json({
+        date1: date1.toUTCString(),
+        date1Unix: date1Unix,
+        date2Unix: date2Unix,
+        difference_milliseconds: diffMilliseconds,
+        difference_seconds: diffSeconds,
+        difference_minutes: diffMinutes,
+        difference_hours: diffHours,
+        difference_days: diffDays
     })
 });
 
