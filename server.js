@@ -43,27 +43,30 @@ app.get("/api/:date", function(req, res){
 app.get("/api/diff/:date1/:date2", function(req, res){
     let date1 = new Date(req.params.date1);
     let date2 = new Date(req.params.date2);
+    let date1Unix;
+    let date2Unix;
 
-    let date1Unix = date1.getTime();
-    let date2Unix = date2.getTime();
+
+    if(isNaN(date1)){
+        let date1Unix = date1.getTime();
+    } else {
+        let date1Unix = date1;
+    }
+    if(isNaN(date2)){
+        let date2Unix = date2.getTime();
+    } else {
+        let date2Unix = date2;
+    }
     
     let diff = Math.abs(date1Unix - date2Unix);
-    
-    let diffMilliseconds = diff;
-    let diffSeconds = diffMilliseconds / 1000;
-    let diffMinutes = diffSeconds / 60;
-    let diffHours = diffMinutes / 60;
-    let diffDays = diffHours / 24;
 
+    let diffDays = parseInt(diff / (1000 * 60 * 60 * 24));
+    // let diffHours = ((diff - (diffDays * 24 * 60 * 60 * 1000)) / (1000 * 60 * 60)) ;
 
     res.json({
         date1: date1.toUTCString(),
         date1Unix: date1Unix,
         date2Unix: date2Unix,
-        difference_milliseconds: diffMilliseconds,
-        difference_seconds: diffSeconds,
-        difference_minutes: diffMinutes,
-        difference_hours: diffHours,
         difference_days: diffDays
     })
 });
