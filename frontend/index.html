@@ -6,7 +6,7 @@
       <link rel="shortcut icon" href="https://cdn.freecodecamp.org/universal/favicons/favicon-32x32.png" type="image/x-icon"/>
       <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet" type="text/css">
       <link href="style.css" rel="stylesheet" type="text/css">
-      <script src="/src/script.js"></script>
+      <script src="script.js"></script>
    </head>
 
    <body>
@@ -19,7 +19,7 @@
               Digite uma data
             </label>
             <input type="text" id="dateConverter" placeholder="ex.: 2024-10-13">
-            <select>
+            <select id="fusoHorarios">
               <option>fuso-horário</option>
               <option value="12">GMT +12</option>
               <option value="11">GMT +11</option>
@@ -47,12 +47,13 @@
               <option value="-11">GMT -11</option>
               <option value="-12">GMT -12</option>
             </select>
-            <input type="button" id="converterButton" placeholder="converter">
+            <input type="button" id="converterButton" onclick="convertDate(dateConverter.value, fusoHorarios.value)" placeholder="converter">
           </div>
           <div class="outputsConverter outputs">
             <div id="convertedUTC"><span id="convertedUTCText"></span></div>
             <div id="convertedUnix"><span id="convertedUnixText"></span></div>
           </div>
+          <input type="button" onclick="cleanInnerText()">
       </div>
       <div class="difference">
         <h2>Calculador de diferenças entre datas</h2>
@@ -65,7 +66,7 @@
           <div id="Days"><span id="differenceDays"></span></div>
           <div id="Hours"><span id="differenceHours"></span></div>
           <div id="Minutes"><span id="differenceMinutes"></span></div>
-          <div id="Seconds"><span id="convertedUnixText"></span></div>
+          <div id="Seconds"><span id="differenceSeconds"></span></div>
         </div>
       </div>
     </div>
