@@ -6,78 +6,90 @@
       <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet" type="text/css">
       <link href="style.css" rel="stylesheet" type="text/css">
       <script src="script.js"></script>
+      <style>
+      @import url('https://fonts.googleapis.com/css2?family=Besley:ital,wght@0,400..900;1,400..900&display=swap');
+      </style>
    </head>
 
    <body>
-    <header>
-      <h1>Microsserviço de timestamp</h1>
-      <div id="presentTimer"> <!-- Aqui é onde o horário presente atualizado aparece. -->
-        <div id="presentUTC"></div>
-        <div id="presentUnix"></div>
-      </div>
-    </header>
-      <div class="interactiveApi">
-        <div class="converter">
-          <h2>Conversor de datas</h2>
-          <div class="inputs">
-            <label>
-              Digite uma data
-            </label>
-            <input type="text" id="dateConverter" placeholder="ex.: 2024-10-13"> <!-- Onde o usuário digita a data que quer converter. -->
-            <select id="fusoHorarios"> <!-- Lista para selecionar os fuso horários. -->
-              <option>fuso horários</option>
-              <option value="12">GMT +12</option>
-              <option value="11">GMT +11</option>
-              <option value="10">GMT +10</option>
-              <option value="9">GMT +9</option>
-              <option value="8">GMT +8</option>
-              <option value="7">GMT +7</option>
-              <option value="6">GMT +6</option>
-              <option value="5">GMT +5</option>
-              <option value="4">GMT +4</option>
-              <option value="3">GMT +3</option>
-              <option value="2">GMT +2</option>
-              <option value="1">GMT +1</option>
-              <option value="0">GMT 0</option>
-              <option value="-1">GMT -1</option>
-              <option value="-2">GMT -2</option>
-              <option value="-3">GMT -3</option>
-              <option value="-4">GMT -4</option>
-              <option value="-5">GMT -5</option>
-              <option value="-6">GMT -6</option>
-              <option value="-7">GMT -7</option>
-              <option value="-8">GMT -8</option>
-              <option value="-9">GMT -9</option>
-              <option value="-10">GMT -10</option>
-              <option value="-11">GMT -11</option>
-              <option value="-12">GMT -12</option>
-            </select>
-            <button id="converterButton" onclick="convertDate(dateConverter.value, fusoHorarios.value)">converter</button> <!-- Botão que, quando clicado, chama a função de converter a data inserida. -->
-          </div>
-          <div class="outputsConverter outputs"> <!-- Exibe os resultados -->
-            <div id="convertedUTC"><span id="convertedUTCText"></span></div>
-            <div id="convertedUnix"><span id="convertedUnixText"></span></div>
-          </div>
-          <button onclick="cleanConverterInnerText()">apagar</button> <!-- Botão que, quando clicado, chama a função de apagar os resultados. -->
-      </div>
-      <div class="difference">
-        <h2>Calculador de diferenças entre datas</h2>
-        <div class="inputs"> <!-- Onde o usuário digita as datas que quer calcular. -->
-          <input type="text" id="dateDifference1" placeholder="ex.: 2024-10-13">
-         <input type="text" id="dateDifference2" placeholder="ex.: 2025-05-29">
-         <button id="converterButton" onclick="differenceDates(dateDifference1.value, dateDifference2.value)" placeholder="converter">calcular</button> <!-- Botão que, quando clicado, chama a função de calcular a diferença entre as datas inseridas. -->
+    <div id="background">
+      <header>
+        <h1>Microsserviço de Timestamp</h1>
+        <div id="presentTimer"> <!-- Aqui é onde o horário presente atualizado aparece. -->
+          <div id="presentUTC"></div>
+          <div id="presentUnix"></div>
         </div>
-        <div class="outputsDifference outputs"> <!-- Exibe os resultados -->
-          <div>Dias</div>
-          <span id="differenceDays"></span>
-          <div>Horas</div>
-          <span id="differenceHours"></span>
-          <div>Minutos</div>
-          <span id="differenceMinutes"></span>
-          <div>Segundos</div>
-          <span id="differenceSeconds"></span>
+      </header>
+        <div class="line"></div>
+        <div id="interactiveApi">
+          <div class="converter">
+            <h2>Conversor de datas</h2>
+            <div class="converterInputsOutputs">
+              <div class="inputs">
+                <div class="labelInput">
+                  <label>
+                    Digite uma data
+                  </label>
+                  <input type="text" id="dateConverter" placeholder="ex.: 2024-10-13"> <!-- Onde o usuário digita a data que quer converter. -->
+                  <select id="fusoHorarios"> <!-- Lista para selecionar os fuso horários. -->
+                    <option>fuso horários</option>
+                    <option value="12">GMT +12</option>
+                    <option value="11">GMT +11</option>
+                    <option value="10">GMT +10</option>
+                    <option value="9">GMT +9</option>
+                    <option value="8">GMT +8</option>
+                    <option value="7">GMT +7</option>
+                    <option value="6">GMT +6</option>
+                    <option value="5">GMT +5</option>
+                    <option value="4">GMT +4</option>
+                    <option value="3">GMT +3</option>
+                    <option value="2">GMT +2</option>
+                    <option value="1">GMT +1</option>
+                    <option value="0">GMT 0</option>
+                    <option value="-1">GMT -1</option>
+                    <option value="-2">GMT -2</option>
+                    <option value="-3">GMT -3</option>
+                    <option value="-4">GMT -4</option>
+                    <option value="-5">GMT -5</option>
+                    <option value="-6">GMT -6</option>
+                    <option value="-7">GMT -7</option>
+                    <option value="-8">GMT -8</option>
+                    <option value="-9">GMT -9</option>
+                    <option value="-10">GMT -10</option>
+                    <option value="-11">GMT -11</option>
+                    <option value="-12">GMT -12</option>
+                  </select>
+               </div>
+                <button id="converterButton" onclick="convertDate(dateConverter.value, fusoHorarios.value)">converter</button> <!-- Botão que, quando clicado, chama a função de converter a data inserida. -->
+              </div>
+              <div class="outputsConverter outputs"> <!-- Exibe os resultados -->
+                <div id="convertedUTC"><span id="convertedUTCText"></span></div>
+                <div id="convertedUnix"><span id="convertedUnixText"></span></div>
+              </div>
+              <button class="erase" onclick="cleanConverterInnerText()">apagar</button> <!-- Botão que, quando clicado, chama a função de apagar os resultados. -->
+            </div>
         </div>
-        <button onclick="cleanDifferenceInnerText()">apagar</button> <!-- Botão que, quando clicado, chama a função de apagar os resultados. -->
+        <div class="line"></div>
+        <div class="difference">
+          <h2>Calculador de diferenças entre datas</h2>
+          <div class="inputs"> <!-- Onde o usuário digita as datas que quer calcular. -->
+            <input type="text" id="dateDifference1" placeholder="ex.: 2024-10-13">
+            <input type="text" id="dateDifference2" placeholder="ex.: 2025-05-29">
+             <button id="converterButton" onclick="differenceDates(dateDifference1.value, dateDifference2.value)" placeholder="converter">calcular</button> <!-- Botão que, quando clicado, chama a função de calcular a diferença entre as datas inseridas. -->
+          </div>
+          <div class="outputsDifference outputs"> <!-- Exibe os resultados -->
+            <div>Dias</div>
+            <span id="differenceDays"></span>
+            <div>Horas</div>
+            <span id="differenceHours"></span>
+            <div>Minutos</div>
+            <span id="differenceMinutes"></span>
+            <div>Segundos</div>
+            <span id="differenceSeconds"></span>
+          </div>
+          <button onclick="cleanDifferenceInnerText()">apagar</button> <!-- Botão que, quando clicado, chama a função de apagar os resultados. -->
+        </div>
+        <div class="line"></div>
       </div>
     </div>
   </body>

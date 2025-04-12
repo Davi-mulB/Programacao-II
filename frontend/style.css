@@ -1,38 +1,101 @@
 html, body {
-    margin: 0;
-    height: 100%;
-	overflow: hidden;
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  font-family: 'Roboto', sans-serif;
+  background-color: #f4f4f4;
+  overflow: hidden;
 }
 
-body {
-	font-family: 'Roboto', sans-serif;
-	color: white;
-	background-color: black;
+#background {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  height: 100%;
+  padding: 20px;
+  box-sizing: border-box;
 }
 
 header {
-	display: flex;
-	justify-content: space-between;
-	padding: 2vh 1vw;
-	height: 15%;
-	align-items: center;
+  text-align: center;
 }
 
-h1 {
-	margin: 0;
+header h1 {
+  margin: 0;
+  font-size: 2rem;
 }
 
-.outputs > div,
-span {
-	background-color: gray;
-	color: white;
-	height: 2rem;
+#line {
+  width: 80%;
+  height: 1px;
+  background-color: #ccc;
+  margin: 10px 0;
 }
 
-.outputsConverter {
-	height: 6rem;
+#interactiveApi {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  overflow-y: auto;
 }
 
-.outputsDifference {
-	height: 10rem;
+.converter, .difference {
+  width: 80%;
+  max-width: 600px;
+  margin: 10px 0;
+  text-align: center;
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.converterInputsOutputs, .inputs {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.inputs input, .inputs select {
+  margin: 5px 0;
+  padding: 10px;
+  width: 100%;
+  max-width: 300px;
+  box-sizing: border-box;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+button {
+  margin: 10px 0;
+  padding: 10px 20px;
+  background-color: #007BFF;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+.outputs {
+  margin: 10px 0;
+}
+
+.outputs div, .outputs span {
+  margin: 5px 0;
+  font-size: 1rem;
+}
+
+.erase {
+  background-color: #dc3545;
+}
+
+.erase:hover {
+  background-color: #a71d2a;
 }
