@@ -105,4 +105,4 @@ http://localhost:3000/api/diff/:date1/:date2
 
 ## Autor
 
-Desenvolvido por **Davi Blum**.
+Desenvolvido por **Davi Blum** IA23.
