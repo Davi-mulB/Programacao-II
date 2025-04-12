@@ -49,12 +49,6 @@ Este projeto é um Trabalho Prático de Desenvolvimento de um Microsserviço de 
      - Conversão de datas para UTC e Unix, com suporte a fusos horários.
      - Cálculo da diferença entre duas datas.
 
-### Tecnologias Utilizadas
-
-- **Backend**: Node.js, Express.
-- **Frontend**: HTML, CSS, JavaScript.
-- **Estilo**: CSS com design responsivo e minimalista.
-
 ---
 
 ## Passo a Passo de Execução
@@ -62,8 +56,8 @@ Este projeto é um Trabalho Prático de Desenvolvimento de um Microsserviço de 
 ### 1. Clonar o Repositório
 Clone o repositório para o seu ambiente local:
 ```sh
-git clone https://github.com/seu-usuario/seu-repositorio.git
-cd seu-repositorio
+git clone https://github.com/Davi-mulB/Programacao-II.git
+cd Programacao-II
 ```
 
 ### 2. Instalar Dependências
@@ -106,23 +100,6 @@ http://localhost:3000/api/diff/:date1/:date2
 ```
 - **Parâmetros**:
   - `:date1` e `:date2`: Datas no formato ISO ou timestamp Unix.
-
----
-
-## Estrutura do Projeto
-
-```
-package.json
-README.md
-server.js
-frontend/
-  ├── index.html
-  ├── script.js
-  ├── style.css
-```
-
-- **`server.js`**: Implementa a API com Node.js e Express.
-- **`frontend/`**: Contém os arquivos do frontend (HTML, CSS e JavaScript).
 
 ---
 
